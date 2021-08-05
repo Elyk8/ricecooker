@@ -27,23 +27,23 @@ AURPKGS += pfetch zramd ttf-twemoji libxft-bgra-git ttf-devicons nerd-fonts-mono
 .DEFAULT_GOAL := help
 
 help:
-	@echo 'Makefile for dotfiles																										'
-	@echo '																																					'
-	@echo 'Usage:																																		'
-	@echo '   make all													install everything									'
-	@echo '   make setup												initial system setup								'
-	@echo '   make base													install base packages								'
-	@echo '   make aur													install aur packages								'
-	@echo '   make dotfiles                     deploy dotfiles											'
-	@echo '   make suckless                     install suckless tools							'
-	@echo '   make lunarvim                     install lunarvim										'
-	@echo '   make bashdash                     point /bin/sh to dash								'
-	@echo '																																					'
-	@echo 'All install commands are also available as clean commands to remove			'
-	@echo 'installed files																													'
-	@echo '																																					'
-	@echo 'WARNING: MAKE SURE TO BACKUP YOUR CONFIGURATIONS!!!!											'
-	@echo '																																					'
+	@echo 'Makefile for dotfiles                                                    '
+	@echo '                                                                         '
+	@echo 'Usage:                                                                   '
+	@echo '   make all                          install everything                  '
+	@echo '   make setup                        initial system setup                '
+	@echo '   make base                         install base packages               '
+	@echo '   make aur                          install aur packages                '
+	@echo '   make dotfiles                     deploy dotfiles                     '
+	@echo '   make suckless                     install suckless tools              '
+	@echo '   make lunarvim                     install lunarvim                    '
+	@echo '   make bashdash                     point /bin/sh to dash               '
+	@echo '                                                                         '
+	@echo 'All install commands are also available as clean commands to remove      '
+	@echo 'installed files                                                          '
+	@echo '                                                                         '
+	@echo 'WARNING: MAKE SURE TO BACKUP YOUR CONFIGURATIONS!!!!                     '
+	@echo '                                                                         '
 
 
 all: setup base aur dotfiles suckless lunarvim bashdash
@@ -103,7 +103,7 @@ lunarvim: #WIP
 	cd ${HOME}
 
 bashdash:
-	cd ${HOME}/ricecooker
 	${PACMAN} dash
+	cd ${HOME}/ricecooker
 	sudo ln -sfT /usr/bin/dash /usr/bin/sh
 	sudo cp ./pachooks/bash-update.hook /usr/share/libalpm/hooks
