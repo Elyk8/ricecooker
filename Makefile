@@ -13,7 +13,7 @@ PACMAN					:= sudo pacman -S --needed
 PARU						:= paru -S
 SYSTEMD_ENABLE	:= sudo systemctl --now enable
 
-BASEPKGS := acpilight xorg sx simplescreenrecorder ttf-bitstream-vera
+BASEPKGS := acpilight xorg-server xorg-apps sx simplescreenrecorder ttf-bitstream-vera
 BASEPKGS += ttf-dejavu ttf-liberation ttf-linux-libertine noto-fonts tex-gyre-fonts
 BASEPKGS += ttf-jetbrains-mono adobe-source-code-pro-fonts noto-fonts-cjk noto-fonts-emoji
 BASEPKGS += zathura zathura-pdf-mupdf calcurse dunst exa feh flameshot inkscape
