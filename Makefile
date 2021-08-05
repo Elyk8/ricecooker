@@ -54,7 +54,7 @@ all: setup base aur dotfiles suckless lunarvim bashdash
 	@echo "All done."
 
 clean:
-	sudo rm -rf ${HOME}/.config ${HOME}/.local/bin ${HOME}/.local/share/applications
+	sudo rm -rfv ${HOME}/.config ${HOME}/.local/bin ${HOME}/.local/share/applications ${HOME}/.local/share/dotrice
 
 setup:
 	sudo timedatectl set-ntp true
