@@ -15,7 +15,7 @@ echo root:hotsdad69 | chpasswd
 # You can add xorg to the installation packages, I usually add it at the DE or WM install script
 # You can remove the tlp package if you are installing on a desktop or vm
 
-pacman -S --noconfirm grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools reflector base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb dnsutils bluez bluez-utils cups alsa-utils pipewire pipewire-alsa pipewire-pulse bash-completion reflector acpi acpi_call tlp ipset firewalld acpid os-prober ntfs-3g terminus-font
+pacman -S --noconfirm grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools reflector linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb dnsutils bluez bluez-utils cups alsa-utils pipewire pipewire-alsa pipewire-pulse bash-completion reflector acpi acpi_call tlp ipset firewalld acpid os-prober ntfs-3g terminus-font
 
 #pacman -S --noconfirm xf86-video-amdgpu
 #pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
