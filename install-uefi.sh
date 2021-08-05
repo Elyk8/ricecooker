@@ -10,7 +10,7 @@ echo "skynet" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 skynet.localdomain skynet" >> /etc/hosts
-echo root:password | chpasswd
+echo root:hotsdad69 | chpasswd
 
 # You can add xorg to the installation packages, I usually add it at the DE or WM install script
 # You can remove the tlp package if you are installing on a desktop or vm
@@ -33,7 +33,7 @@ systemctl enable fstrim.timer
 systemctl enable acpid
 
 useradd -m elyk
-echo elyk:password | chpasswd
+echo elyk:hotsdad69 | chpasswd
 #usermod -aG libvirt elyk
 usermod -aG video,audio elyk
 
