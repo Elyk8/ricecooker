@@ -53,6 +53,9 @@ all: setup base aur dotfiles suckless lunarvim bashdash
 	@echo ""
 	@echo "All done."
 
+clean:
+	sudo rm -rf ${HOME}/.config ${HOME}/.local/bin ${HOME}/.local/share/applications
+
 setup:
 	sudo timedatectl set-ntp true
 	sudo hwclock --systohc
@@ -72,12 +75,10 @@ aur:
 dotfiles:
 	git config --global credential.helper cache
 	cd ${HOME}
-	sudo rm -r ${HOME}/.config ${HOME}/.local/bin ${HOME}/.local/share/applications
 	mkdir -p ${HOME}/.local/share/dotrice
 	git clone --bare https://github.com/Elyk8/dotrice.git ${HOME}/.local/share/dotrice
-	alias rice='/usr/bin/git --git-dir=${HOME}/.local/share/dotrice --work-tree=${HOME}'
-	rice config --local status.showUntrackedFiles no
-	rice checkout -f
+	/usr/bin/git --git-dir=${HOME}/.local/share/dotrice --work-tree=${HOME} config --local status.showUntrackedFiles no
+	/usr/bin/git --git-dir=${HOME}/.local/share/dotrice --work-tree=${HOME} checkout -f
 
 suckless:
 	cd ${HOME}

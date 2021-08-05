@@ -7,7 +7,7 @@ locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "FONT=ter-132n" > /etc/vconsole.conf
 echo "skynet" >> /etc/hostname
-echo "127.0.0.1 localhost" >> /etc/hosts
+echo "127.0.0.1 localhost" > /etc/hosts
 echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 skynet.localdomain skynet" >> /etc/hosts
 echo root:hotsdad69 | chpasswd
