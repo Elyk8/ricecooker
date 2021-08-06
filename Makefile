@@ -105,7 +105,8 @@ lunarvim: #WIP
 	cd ${HOME}
 
 bashdash:
+	cd ${HOME}
 	${PACMAN} dash
-	cd ${HOME}/ricecooker
 	sudo ln -sfT /usr/bin/dash /usr/bin/sh
+	cd ${HOME}/ricecooker
 	sudo cp ./pachooks/bash-update.hook /usr/share/libalpm/hooks
