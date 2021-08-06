@@ -79,6 +79,8 @@ dotfiles:
 	git clone --bare https://github.com/Elyk8/dotrice.git ${HOME}/.local/share/dotrice
 	/usr/bin/git --git-dir=${HOME}/.local/share/dotrice --work-tree=${HOME} config --local status.showUntrackedFiles no
 	/usr/bin/git --git-dir=${HOME}/.local/share/dotrice --work-tree=${HOME} checkout -f
+	ln -sf ${HOME}/.config/shell/environment ${HOME}/.zshenv
+	ln -sf ${HOME}/.config/zsh/.zprofile ${HOME}/.profile
 
 suckless:
 	cd ${HOME}
