@@ -37,7 +37,7 @@ echo elyk:hotsdad69 | chpasswd
 #usermod -aG libvirt elyk
 usermod -aG video,audio elyk
 
-echo "elyk ALL=(ALL) ALL" >> /etc/sudoers.d/elyk
+echo "elyk ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/elyk
 
 
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"

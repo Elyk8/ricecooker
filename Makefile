@@ -97,12 +97,11 @@ suckless:
 	cd ../st && sudo make clean install
 	cd ../sxiv && sudo make clean install
 
-lunarvim: #WIP
+lunarvim:
 	cd ${HOME}
 	curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh | LVBRANCH=rolling bash -s -- --overwrite
 	cd ${HOME}/.config
-	git clone https://github.com/Elyk8/lvim.git
-	cd ${HOME}
+	rm -r lvim && git clone https://github.com/Elyk8/lvim.git
 
 bashdash:
 	cd ${HOME}
