@@ -46,7 +46,7 @@ help:
 	@echo '                                                                         '
 
 
-all: setup base aur dotfiles suckless lunarvim bashdash
+all: base aur dotfiles suckless lunarvim bashdash
 	@echo ""
 	@echo "dotfiles - Making yourself at home"
 	@echo "=================================="
@@ -90,13 +90,12 @@ suckless:
 	git clone https://github.com/Elyk8/dwmblocks.git
 	git clone https://github.com/Elyk8/dmenu.git
 	git clone https://github.com/Elyk8/st.git
-	git clone https://github.com/Elyk8/sxiv
+	git clone https://github.com/Elyk8/sxiv.git
 	cd dwm && sudo make clean install
 	cd ../dwmblocks && sudo make clean install
 	cd ../dmenu && sudo make clean install
 	cd ../st && sudo make clean install
 	cd ../sxiv && sudo make clean install
-	cd ${HOME}
 
 lunarvim: #WIP
 	cd ${HOME}
