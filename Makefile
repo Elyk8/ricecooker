@@ -83,19 +83,17 @@ dotfiles:
 	ln -sf ${HOME}/.config/zsh/.zprofile ${HOME}/.profile
 
 suckless:
-	cd ${HOME}
 	mkdir -p ${HOME}/.local/src
-	cd ${HOME}/.local/src
-	git clone https://github.com/Elyk8/dwm.git
-	git clone https://github.com/Elyk8/dwmblocks.git
-	git clone https://github.com/Elyk8/dmenu.git
-	git clone https://github.com/Elyk8/st.git
-	git clone https://github.com/Elyk8/sxiv.git
-	cd dwm && sudo make clean install
-	cd ../dwmblocks && sudo make clean install
-	cd ../dmenu && sudo make clean install
-	cd ../st && sudo make clean install
-	cd ../sxiv && sudo make clean install
+	git clone https://github.com/Elyk8/dwm.git ${HOME}/.local/src/dwm
+	git clone https://github.com/Elyk8/dwmblocks.git ${HOME}/.local/src/dwmblocks
+	git clone https://github.com/Elyk8/dmenu.git ${HOME}/.local/src/dmenu
+	git clone https://github.com/Elyk8/st.git ${HOME}/.local/src/st
+	git clone https://github.com/Elyk8/sxiv.git ${HOME}/.local/src/sxiv
+	cd ${HOME}/.local/src/dwm && sudo make clean install
+	cd ${HOME}/.local/src/dwmblocks && sudo make clean install
+	cd ${HOME}/.local/src/dmenu && sudo make clean install
+	cd ${HOME}/.local/src/st && sudo make clean install
+	cd ${HOME}/.local/src/sxiv && sudo make clean install
 
 lunarvim:
 	cd ${HOME}
