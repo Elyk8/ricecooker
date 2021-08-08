@@ -103,8 +103,7 @@ suckless:
 lunarvim:
 	cd ${HOME}
 	curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh | LVBRANCH=rolling bash -s -- --overwrite
-	cd ${HOME}/.config
-	rm -r lvim && git clone https://github.com/Elyk8/lvim.git
+	git clone https://github.com/Elyk8/lvim.git ${HOME}/.config/lvim
 
 bashdash:
 	cd ${HOME}
