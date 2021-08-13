@@ -1,0 +1,16 @@
+#!/bin/sh
+
+notiftoggle () {
+    dunstctl set-paused toggle
+    kill -63 "$(pidof dwmblocks)"
+}
+
+case $BUTTON in
+    1) notiftoggle ;;
+	3) notify-send "🎵 Notification module" "\- Do Not Disturb indicator.
+- ⛔ when DND is on.
+- 🟢 when DND is off.";;
+	6) "$TERMINAL" -e "$EDITOR" $0 ;;
+esac
+
+[ "$(dunstctl is-paused)" = true ] && echo "⛔" || echo "🟢"

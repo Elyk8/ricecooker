@@ -1,0 +1,6 @@
+#!/bin/sh
+
+while : ; do
+    pomodoro -g >/dev/null && kill -53 "$(pidof "${STATUSBAR:-dwmblocks}")" || break
+    sleep 0.9
+done

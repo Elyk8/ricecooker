@@ -1,0 +1,16 @@
+#!/bin/sh
+pidof -x sb-pomodoroup >/dev/null 2>&1 || sb-pomodoroup >/dev/null 2>&1 &
+
+timer=$(pomodoro -g)
+[ -z "$timer" ] && echo "🍏Apple" || echo "$timer"
+
+case $BUTTON in
+ 	1) pomodoro -g >/dev/null || pomodoro -s Work ;;
+ 	2) pomodoro -k ;;
+ 	3) setsid -f "$TERMINAL" -e "$EDITOR" ~/.config/pomodoro/config ; notify-send "🍎 Pomodoro module" "\- Displays a pomodoro timer.
+- ⏰ Time remaining.
+- Left click starts timer with work time
+of 25mins and break time of 5mins.
+- Middle click stops the timer.";;
+	6) "$TERMINAL" -e "$EDITOR" $0 ;;
+esac

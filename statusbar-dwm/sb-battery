@@ -1,0 +1,71 @@
+#!/bin/sh
+
+# Prints all batteries, their percentage remaining and an emoji corresponding
+# to charge status (🔌 for plugged up, 🔋 for discharging on battery, etc.).
+
+case $BUTTON in
+1) notify-send "$(acpi -bat)" ;;
+3) notify-send "  Battery module" "Displays battery percentage
+ : not charging
+ : charging
+ : charged
+!: battery very low!" ;;
+6) setsid -f "$TERMINAL" -e "$EDITOR" $0 ;;
+esac
+
+# Loop through all attached batteries and format the info
+for battery in /sys/class/power_supply/BAT?*; do
+	# If non-first battery, print a space separator.
+	[ -n "${capacity+x}" ] && printf " "
+	capacity=$(cat "$battery/capacity")
+	# Sets up the status and capacity
+	case "$(cat "$battery/status")" in
+	"Full") status="" ;;
+	"Discharging")
+		if [ "$capacity" -gt "90" ]; then
+			status=""
+		elif [ "$capacity" -gt "80" ] && [ "$capacity" -lt "91" ]; then
+			status=""
+		elif [ "$capacity" -gt "70" ] && [ "$capacity" -lt "81" ]; then
+			status=""
+		elif [ "$capacity" -gt "60" ] && [ "$capacity" -lt "71" ]; then
+			status=""
+		elif [ "$capacity" -gt "50" ] && [ "$capacity" -lt "61" ]; then
+			status=""
+		elif [ "$capacity" -gt "40" ] && [ "$capacity" -lt "51" ]; then
+			status=""
+		elif [ "$capacity" -gt "30" ] && [ "$capacity" -lt "41" ]; then
+			status=""
+		elif [ "$capacity" -gt "20" ] && [ "$capacity" -lt "31" ]; then
+			status=""
+		elif [ "$capacity" -gt "10" ] && [ "$capacity" -lt "21" ]; then
+			status=""
+		else
+			status="!"
+		fi
+		;;
+	"Charging")
+		if [ "$capacity" -gt "90" ]; then
+			status=""
+		elif [ "$capacity" -gt "80" ] && [ "$capacity" -lt "90" ]; then
+			status=""
+		elif [ "$capacity" -gt "60" ] && [ "$capacity" -lt "80" ]; then
+			status=""
+		elif [ "$capacity" -gt "40" ] && [ "$capacity" -lt "60" ]; then
+			status=""
+		elif [ "$capacity" -gt "30" ] && [ "$capacity" -lt "40" ]; then
+			status=""
+		elif [ "$capacity" -gt "20" ] && [ "$capacity" -lt "30" ]; then
+			status=""
+		else
+			status=""
+		fi
+		;;
+	"Not charging") status="" ;;
+	"Unknown") status="" ;;
+	esac
+
+	# Prints the info
+	printf "%s%s %d%%" "$status" "$warn" "$capacity"
+	unset warn
+done && exit 0
