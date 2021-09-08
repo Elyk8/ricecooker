@@ -18,7 +18,7 @@ BASEPKGS += ttf-dejavu ttf-liberation ttf-linux-libertine noto-fonts tex-gyre-fo
 BASEPKGS += ttf-jetbrains-mono adobe-source-code-pro-fonts noto-fonts-cjk noto-fonts-emoji
 BASEPKGS += zathura zathura-pdf-mupdf calcurse dunst exa feh flameshot inkscape
 BASEPKGS += lxappearance-gtk3 lxsession-gtk3 mpc mpd mpv ncmpcpp wmctrl lazygit newsboat
-BASEPKGS += redshift rofi rofi-pass trash-cli
+BASEPKGS += redshift rofi trash-cli
 
 AURPKGS := beautyline brave-bin dragon-drag-and-drop gotop-bin lf-bin
 AURPKGS += mpd-notification-git mutt-wizard nerd-fonts-jetbrains-mono
@@ -90,14 +90,14 @@ dotfiles:
 
 suckless:
 	mkdir -p ${HOME}/.local/src
-	git clone https://github.com/Elyk8/duskier.git ${HOME}/.local/src/dusk
+	git clone https://github.com/Elyk8/dwm.git ${HOME}/.local/src/dwm
 	git clone https://github.com/Elyk8/dwmblocks.git ${HOME}/.local/src/dwmblocks
 	git clone https://github.com/Elyk8/dmenu.git ${HOME}/.local/src/dmenu
 	git clone https://github.com/Elyk8/st.git ${HOME}/.local/src/st
 	git clone https://github.com/Elyk8/sxiv.git ${HOME}/.local/src/sxiv
 	git clone https://github.com/Elyk8/shotkey.git ${HOME}/.local/src/shotkey
 	git clone https://github.com/Elyk8/touchcursor-linux.git ${HOME}/.local/src/touchcursor
-	cd ${HOME}/.local/src/dusk && sudo make clean install
+	cd ${HOME}/.local/src/dwm && sudo make clean install
 	cd ${HOME}/.local/src/dwmblocks && sudo make clean install
 	cd ${HOME}/.local/src/dmenu && sudo make clean install
 	cd ${HOME}/.local/src/st && sudo make clean install
