@@ -1,0 +1,20 @@
+#!/bin/sh
+
+toggleredshift() {
+	pidof redshift >/dev/null && killall redshift || setsid redshift
+}
+
+case $BLOCK_BUTTON in
+1) notify-send "$(redshift -p)" ;;
+2) toggleredshift ;;
+# 4)  ;;
+# 5)  ;;
+3) notify-send " Redshift module" "\- Displays current redshift status
+-  at night.
+-  during transition phase.
+-  when it is day time." ;;
+10) setsid -f "$TERMINAL" -e "$EDITOR" $0 ;;
+12) setsid -f "$TERMINAL" -e "$EDITOR" $STATUSSCRIPTS/display/sb-redshiftstatus ;;
+esac
+
+duskc --ignore-reply run_command setstatus $BLOCK_STATUS "$(sb-redshiftstatus)"

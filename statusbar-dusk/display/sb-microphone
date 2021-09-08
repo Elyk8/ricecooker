@@ -1,0 +1,4 @@
+#!/bin/sh
+index=$(pamixer --list-sources | awk '/input/ {print $1}')
+mic_muted="$(pamixer --source "$index" --get-mute)"
+[ "$mic_muted" = "true" ] && echo "🎙️❎" || echo "🎙️✅"

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+1) notify-send "$(acpi -bat)" ;;
+3) notify-send "🔋 Battery module" "🔋: discharging
+🛑: not charging
+♻: stagnant charge
+🔌: charging
+⚡: charged
+❗: battery very low!";;
+10) setsid -f "$TERMINAL" -e "$EDITOR" $0 ;;
+12) setsid -f "$TERMINAL" -e "$EDITOR" $STATUSSCRIPTS/display/sb-battery ;;
+esac

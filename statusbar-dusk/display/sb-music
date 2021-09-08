@@ -1,0 +1,27 @@
+#!/bin/sh
+pidof -x sb-mpdup >/dev/null 2>&1 || sb-mpdup >/dev/null 2>&1 &
+
+# Displays the current song being played on mpd
+
+# ARTIST=$(mpc current -f %artist%)
+SONG=$(mpc current -f %title% | cut -c -20)
+LENGTH=$(echo "${#SONG}")
+
+if [ "$LENGTH" -gt "19" ]; then
+	SONG=$(echo "${SONG}..")
+fi
+
+STATUS=$(mpc status | grep -o '\[.*\]')
+volume=$(mpc volume | grep -o '[0-9]\+')
+
+if [ "$volume" -gt "70" ]; then
+	VOL="🔊"
+elif [ "$volume" -lt "20" ]; then
+	VOL="🔈"
+else
+	VOL="🔉"
+fi
+
+[ "$STATUS" = "[paused]" ] && STATE="⏸" || STATE="🎵"
+
+[ -n "$SONG" ] && echo "$STATE$SONG $VOL$volume%" || echo "🎵 Mpd"

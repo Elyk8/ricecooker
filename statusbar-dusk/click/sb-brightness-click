@@ -1,0 +1,26 @@
+#!/bin/sh
+
+toggle_brightness() {
+  if [ "$(xbacklight -get)" -gt "70" ]; then
+    xbacklight -set 1 -fps 30
+  elif [ "$(xbacklight -get)" -lt "20" ]; then
+    xbacklight -set 25 -fps 30
+  elif [ "$(xbacklight -get)" -lt "70" ] && [ "$(xbacklight -get)" -gt "20" ]; then 
+    xbacklight -set 75 -fps 30
+  fi
+}
+
+case $BLOCK_BUTTON in
+1) toggle_brightness  ;;
+2) xbacklight -set 1 -fps 30 ;;
+3) notify-send "🔆 Brightness module" "Displays brightness level
+- Left click to toggle brightness
+- Middle click to set at minimum brightness
+- Scroll to change." ;;
+4) xbacklight -inc 1 -time 0 ;;
+5) xbacklight -dec 1 -time 0 ;;
+10) setsid -f "$TERMINAL" -e "$EDITOR" $0 ;;
+12) setsid -f "$TERMINAL" -e "$EDITOR" $STATUSSCRIPTS/display/sb-brightness ;;
+esac
+
+duskc --ignore-reply run_command setstatus $BLOCK_STATUS "$(sb-brightness)"

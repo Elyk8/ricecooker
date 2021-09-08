@@ -1,0 +1,9 @@
+#!/bin/sh
+
+printf "Beginning upgrade.\\n"
+
+paru -Syu
+duskc --ignore-reply run_command setstatus 15 "$(sb-pacpackages)"
+
+printf "\\nUpgrade complete.\\nPress <Enter> to exit window.\\n\\n"
+read -r _

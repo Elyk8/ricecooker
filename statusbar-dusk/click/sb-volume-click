@@ -1,0 +1,15 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) setsid -f pavucontrol ;;
+  2) pamixer -t ;;
+	3) notify-send "📢 Volume module" "\- Shows volume 🔊, 🔇 if muted.
+- Middle click to mute.
+- Scroll to change." ;;
+	4) pamixer --allow-boost -i 1; setsid -f canberra-gtk-play -i audio-volume-change ;;
+	5) pamixer --allow-boost -d 1; setsid -f canberra-gtk-play -i audio-volume-change ;;
+	10) setsid -f "$TERMINAL" -e "$EDITOR" $0 ;;
+	12) setsid -f "$TERMINAL" -e "$EDITOR" $STATUSSCRIPTS/display/sb-volume ;;
+esac
+
+duskc --ignore-reply run_command setstatus $BLOCK_STATUS "$(sb-volume)"

@@ -1,0 +1,17 @@
+#!/bin/sh
+SETSTATUS="duskc run_command setstatus"
+
+case $BLOCK_STATUS in
+0) sb-keymode-click ;;
+1) sb-clock-click ;;
+2) sb-battery-click ;;
+3) sb-brightness-click ;;
+4) sb-redshiftstatus-click ;;
+5) sb-volume-click ;;
+6) sb-microphone-click ;;
+7) sb-mailbox-click ;;
+8) sb-forecast-click ;;
+13) sb-music-click ;;
+15) sb-pacpackages-click ;;
+# *) notify-send -t 2000 "Unknown status $BLOCK_STATUS clicked $BLOCK_BUTTON" & ;;
+esac

@@ -1,0 +1,43 @@
+#!/bin/sh
+for pid in $(pidof -x "sb-updater"); do
+	if [ $pid != $$ ]; then
+		echo "$(date +"%F %T"): status_updater.sh is already running with PID $pid, killing"
+		kill $pid
+	fi
+done
+
+# Add an artificial sleep to wait for the IPC handler to be ready to process requests
+sleep 0.3
+
+SETSTATUS="duskc --ignore-reply run_command setstatus"
+
+# Non updated status here
+# $SETSTATUS 7 "$(~/bin/statusbar/statusbutton)" &
+$SETSTATUS 0 "$(sb-keymode)" &
+$SETSTATUS 3 "$(sb-brightness)" &
+
+$SETSTATUS 5 "$(sb-volume)" &
+$SETSTATUS 6 "$(sb-microphone)" &
+
+$SETSTATUS 13 "$(sb-music)" &
+$SETSTATUS 15 "$(sb-pacpackages)" &
+
+secs=0
+while true; do
+
+	if [ $((secs % 5)) = 0 ]; then
+		$SETSTATUS 2 "$(sb-battery)" &
+	fi
+
+	if [ $((secs % 60)) = 0 ]; then
+		$SETSTATUS 1 "$(sb-clock)" &
+	fi
+
+	if [ $((secs % 600)) = 0 ]; then
+		$SETSTATUS 4 "$(sb-redshiftstatus)" &
+    $SETSTATUS 7 "$(sb-mailbox)" &
+	fi
+
+	secs=$((secs + 1))
+	sleep 1
+done
