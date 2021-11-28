@@ -8,6 +8,7 @@
 # !!! Make sure you backup your stuff first !!!
 #
 
+HOME            = /home/elyk
 SHELL						=	/bin/bash
 PACMAN					:= sudo pacman -S --needed
 PARU						:= paru -S
@@ -47,24 +48,23 @@ help:
 	@echo '                                                                         '
 
 
-all: base aur dotfiles suckless lunarvim bashdash
+all: base aur dusk lunarvim bashdash
 	@echo ""
 	@echo "dotfiles - Making yourself at home"
 	@echo "=================================="
 	@echo ""
 	@echo "All done."
 
-clean:
-	sudo rm -rfv ${HOME}/.config ${HOME}/.local/bin ${HOME}/.local/share/applications ${HOME}/.local/share/dotrice
-
 setup:
 	sudo timedatectl set-ntp true
 	sudo hwclock --systohc
 	sudo reflector -c Australia -c "New Zealand" -a 12 -p https -p http --sort rate --save /etc/pacman.d/mirrorlist
 	sudo pacman -Sy
+	cd ${HOME}/ricecooker
 
 base:
 	$(PACMAN) $(BASEPKGS) --ignore=xorg-xbacklight,xf86-video-vesa
+	cd ${HOME}/ricecooker
 
 aur:
 	cd ${HOME}
@@ -72,43 +72,30 @@ aur:
 	cd paru
 	makepkg -si
 	${PARU} ${AURPKGS}
+	cd ${HOME}/ricecooker
 
 interception:
-	$(PACMAN) interception-dual-function-keys
+	mkdir -p ${HOME}/.local/src
+	git clone https://github.com/Elyk8/interception-k2k.git ${HOME}/.local/src/interception-k2k
+	$(PACMAN) interception-tools
 	cd ${HOME}
 	sudo cp -r ${HOME}/ricecooker/interception /etc/interception
+	cd ${HOME}/ricecooker
 
-dotfiles:
-	git config --global credential.helper cache
-	cd ${HOME}
-	mkdir -p ${HOME}/.local/share/dotrice
-	git clone --bare https://github.com/Elyk8/dotrice.git ${HOME}/.local/share/dotrice
-	/usr/bin/git --git-dir=${HOME}/.local/share/dotrice --work-tree=${HOME} config --local status.showUntrackedFiles no
-	/usr/bin/git --git-dir=${HOME}/.local/share/dotrice --work-tree=${HOME} checkout -f
-	ln -sf ${HOME}/.config/shell/environment ${HOME}/.zshenv
-	ln -sf ${HOME}/.config/zsh/.zprofile ${HOME}/.profile
-
-suckless:
+dusk:
 	mkdir -p ${HOME}/.local/src
-	git clone https://github.com/Elyk8/dwm.git ${HOME}/.local/src/dwm
-	git clone https://github.com/Elyk8/dwmblocks.git ${HOME}/.local/src/dwmblocks
-	git clone https://github.com/Elyk8/dmenu.git ${HOME}/.local/src/dmenu
-	git clone https://github.com/Elyk8/st.git ${HOME}/.local/src/st
-	git clone https://github.com/Elyk8/sxiv.git ${HOME}/.local/src/sxiv
+	git clone https://github.com/Elyk8/dusk.git ${HOME}/.local/src/dusk
 	git clone https://github.com/Elyk8/shotkey.git ${HOME}/.local/src/shotkey
-	git clone https://github.com/Elyk8/touchcursor-linux.git ${HOME}/.local/src/touchcursor
-	cd ${HOME}/.local/src/dwm && sudo make clean install
-	cd ${HOME}/.local/src/dwmblocks && sudo make clean install
-	cd ${HOME}/.local/src/dmenu && sudo make clean install
-	cd ${HOME}/.local/src/st && sudo make clean install
-	cd ${HOME}/.local/src/sxiv && sudo make clean install
+	cd ${HOME}/.local/src/dusk && sudo make clean install
 	cd ${HOME}/.local/src/shotkey && sudo make clean install
-	cd ${HOME}/.local/src/touchcursor && sudo make clean install
+	cd ${HOME}/ricecooker
 
 lunarvim:
 	cd ${HOME}
 	curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh | LVBRANCH=rolling bash -s -- --overwrite
+	rm -r ${HOME}/.config/lvim
 	git clone https://github.com/Elyk8/lvim.git ${HOME}/.config/lvim
+	cd ${HOME}/ricecooker
 
 bashdash:
 	cd ${HOME}
